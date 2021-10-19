@@ -1,0 +1,29 @@
+package com.greedy.t;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
+
+import com.greedy.t.BDAO;
+import com.greedy.t.BVO;
+
+
+public class ContentCmd implements Bcmd {
+
+	@Override
+	public void service(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = 
+		(HttpServletRequest)map.get("request");
+		
+		String bNo = request.getParameter("bNo");
+		
+		BDAO dao = new BDAO();
+		BVO bVo = dao.contentView(bNo);
+		
+		model.addAttribute("contentView", bVo);		
+	}
+
+}
